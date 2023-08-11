@@ -1,131 +1,128 @@
-﻿// Задача 25: Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
-// 3, 5 -> 243 (3⁵)
-// 2, 4 -> 16
-Console.WriteLine($"\nЗадача 25. Возведене числа A в натуральную степень B");
+﻿/* Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, 
+которая покажет количество чётных чисел в массиве.
+[345, 897, 568, 234] -> 2
+*/
 
-int Exponentiation(int numberA, int numberB){
-  int result = 1;
-  for(int i=1; i <= numberB; i++){
-    result = result * numberA;
-  }
-    // int result = Math.Pow(numberA, numberB);
-    return result;
+
+Console.WriteLine("Введите размер массива");
+int size = Convert.ToInt32(Console.ReadLine());
+int[] numbers = new int[size];
+int count = 0;
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
+
+
+for (int i = 0; i < numbers.Length; i++)
+{
+    if (numbers[i] % 2 == 0)
+    count++;
 }
 
-  Console.Write("Введите число A: ");
-  int numberA = Convert.ToInt32(Console.ReadLine());
-  Console.Write("Введите число B: ");
-  int numberB = Convert.ToInt32(Console.ReadLine());
 
-  int exponentiation = Exponentiation(numberA, numberB);
-  Console.WriteLine("Ответ: " + exponentiation);
+Console.WriteLine($"количество чётных чисел в массиве -> {count} ");
 
-
-// Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
-// 452 -> 11
-// 82 -> 10
-// 9012 -> 12
-Console.WriteLine($"\nЗадача 27. Выдаёт сумму цифр в числе");
-Console.Write("Введите число N: ");
-int numberN = Convert.ToInt32(Console.ReadLine());
-
-  int SumNumber(int numberN){
-    
-    int counter = Convert.ToString(numberN).Length;
-    int advance = 0;
-    int result = 0;
-
-    for (int i = 0; i < counter; i++){
-      advance = numberN - numberN % 10;
-      result = result + (numberN - advance);
-      numberN = numberN / 10;
-    }
-   return result;
-  }
-
-int sumNumber = SumNumber(numberN);
-Console.WriteLine("Сумма цифр в числе: " + sumNumber);
-
-// Задача 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
-// 1, 2, 5, 7, 19 -> [1, 2, 5, 7, 19]
-// 6, 1, 33 -> [6, 1, 33]
-
-Console.WriteLine($"\nЗадача 29. Ряд чисел преобразует в массив");
-Console.Write("Введите ряд чисел, разделенных запятой : ");
-string? seriesOfNumbers = Console.ReadLine();
-
-seriesOfNumbers = seriesOfNumbers + ",";    // дополнительня запятая для обозначения конца строки
-
-// функция удаления пробелов из строки 
-string RemovingSpaces (string series){
-  string seriesNew = "";
-  for (int i = 0; i < series.Length; i++)
-  {
-    if (series[i] != ' ') 
+void FillArrayRandomNumbers(int[] array)
+{
+    for(int i = 0; i < array.Length; i++)
     {
-      seriesNew += series[i];
+        array[i] = new Random().Next(100,1000);
     }
-  }
-  return seriesNew;
+}
+void PrintArray(int[] array)
+{
+    for(int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();
 }
 
-//  функция  проверки на правильность ввода 
-void СheckNumber2 (int  series){
+/*
+Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.
+[3, 7, 23, 12] -> 19
+[-4, -6, 89, 6] -> 0
+*/
 
-      if (series == '0'||series == '1'||series == '2'
-      ||series == '3'||series == '4'||series == '5'||series == '6'
-      ||series == '7'||series == '8'||series == '9'||series == ','
-      ||series == '-')
-      {
-      }
-        else {
-          Console.WriteLine($"Ошибка ввода  символа. Вводи цифры.");
 
-      }
+int size = 4;
+int[] numbers = new int[size];
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
+
+int sumNumbersEvenIndex = 0;
+
+for (int i = 1; i < numbers.Length; i += 2)
+{
+    sumNumbersEvenIndex += numbers[i];
+}
+Console.Write(sumNumbersEvenIndex);
+
+
+
+void FillArrayRandomNumbers(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        array[i] = new Random().Next(-100, 101);
+    }
 }
 
-// функция  создания и заполнения массива из строки
-int[] ArrayOfNumbers(string seriesNew){ 
-
-  int[] arrayOfNumbers = new int[1];    // инициализация массива из 1 элемента
-
-  int j =0;
-
-  for (int i = 0; i < seriesNew.Length; i++){
-    string seriesNew1 = "";
-
-    while (seriesNew[i] != ',' && i < seriesNew.Length){
-      seriesNew1 += seriesNew[i];
-      СheckNumber2(seriesNew[i]);
-      i++;
+void PrintArray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
     }
-    arrayOfNumbers[j] = Convert.ToInt32(seriesNew1);    // заполняет массив значениями из строки
-    if (i < seriesNew.Length-1){
-      arrayOfNumbers = arrayOfNumbers.Concat(new int[] {0}).ToArray();    // добавляет новый нулевой элемент в конец массива
-    }
-    j++;
-  }
-  return arrayOfNumbers;
+    Console.WriteLine();
 }
 
-// функция  вывода массива на печать 
-void PrintArry(int[] coll){
-  int count = coll.Length;
-  int index = 0;
-  Console.Write("[");
-  while(index < count){
-    Console.Write(coll[index]);
-    index++;
-    if (index < count){
-      Console.Write(", ");
+
+
+/*
+Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементами массива.
+[3 7 22 2 78] -> 76
+*/
+
+int size = 10;
+int[] numbers = new int[size];
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
+
+int max = numbers[0];
+int min = numbers[0];
+
+for (int i = 0; i < numbers.Length; i++)
+{
+    if (numbers[i] > max)
+    {
+        max = numbers[i];
     }
-  }
-  Console.Write("]");
-} 
+    else if (numbers[i] < min)
+    {
+        min = numbers[i];
+    }
+}
+
+Console.WriteLine($"Минимальное число: {min}");
+Console.WriteLine($"Минимальное число: {max}");
+Console.WriteLine($"Разница между максимальным и минимальным числами: {max-min}");
 
 
-string seriesNew = RemovingSpaces(seriesOfNumbers);
 
-int[] arrayOfNumbers =  ArrayOfNumbers(seriesNew);
+void FillArrayRandomNumbers(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        array[i] = new Random().Next(1, 555);
+    }
+}
 
-PrintArry(arrayOfNumbers);
+
+void PrintArray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();
+}
